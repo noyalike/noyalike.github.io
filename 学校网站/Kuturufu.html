@@ -1,0 +1,2457 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>私立久都瑠府高等学园 · 告白墙</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, 'Microsoft YaHei', 'SimSun', sans-serif;
+    }
+
+    /* ===== 主题变量：1年K班（淡黄绿色系） ===== */
+    :root {
+      --page-bg: #eef0dc;
+      --header-bg: #6b7e3a;
+      --header-text: #ffffff;
+      --card-bg: #fafbf2;
+      --card-border: #c8d0b0;
+      --card-header-bg: #e8ecd4;
+      --accent: #6b7e3a;
+      --accent-hover: #556830;
+      --accent-light: #8a9e5a;
+      --link: #6b7e3a;
+      --text: #3a3a2a;
+      --text-muted: #6a6a5a;
+      --text-light: #9a9a8a;
+      --border: #c8d0b0;
+      --border-light: #d8dcc4;
+      --input-bg: #fafbf2;
+      --input-border: #a8b290;
+      --tag-bg: #e8ecd4;
+      --tag-border: #c0c8a8;
+      --tag-text: #5a6e3a;
+      --comment-bg: #f2f4e8;
+      --comment-border: #6b7e3a;
+      --divider: #d8dcc4;
+      --scroll-track: #e8ecd4;
+      --scroll-thumb: #b8c0a0;
+      --banner-overlay: rgba(90, 110, 58, 0.38);
+      --banner-text: #ffffff;
+      --shadow: rgba(90, 110, 58, 0.12);
+      --btn-bg: #7a9a3a;
+      --btn-text: #ffffff;
+      --btn-border: #5a6e3a;
+      --btn-hover: #5a6e3a;
+    }
+
+    /* ===== 主题变量：葬学部 ===== */
+    [data-theme="burial"] {
+      --page-bg: #181818;
+      --header-bg: #2a0808;
+      --header-text: #cc6666;
+      --card-bg: #1e1414;
+      --card-border: #4a2a2a;
+      --card-header-bg: #2a1818;
+      --accent: #aa2222;
+      --accent-hover: #cc3333;
+      --accent-light: #cc4444;
+      --link: #cc4444;
+      --text: #dddddd;
+      --text-muted: #999999;
+      --text-light: #666666;
+      --border: #4a2a2a;
+      --border-light: #331a1a;
+      --input-bg: #150808;
+      --input-border: #661111;
+      --tag-bg: #2a0e0e;
+      --tag-border: #661111;
+      --tag-text: #cc6666;
+      --comment-bg: #1a0a0a;
+      --comment-border: #aa2222;
+      --divider: #331a1a;
+      --scroll-track: #2a0e0e;
+      --scroll-thumb: #661111;
+      --banner-overlay: rgba(0, 0, 0, 0.75);
+      --banner-text: #dddddd;
+      --shadow: rgba(0, 0, 0, 0.5);
+      --btn-bg: #661111;
+      --btn-text: #eeeeee;
+      --btn-border: #aa2222;
+      --btn-hover: #aa2222;
+    }
+
+    body {
+      background: var(--page-bg);
+      min-height: 100vh;
+      padding: 10px 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      color: var(--text);
+      font-size: 13px;
+      line-height: 1.5;
+      transition: background 0.4s ease;
+    }
+
+    .wall-container {
+      max-width: 860px;
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    /* ===== 头部横幅 ===== */
+    .header {
+      position: relative;
+      text-align: center;
+      margin-bottom: 14px;
+      overflow: hidden;
+      min-height: 150px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px 16px;
+      border: 1px solid var(--card-border);
+      background: var(--header-bg);
+    }
+
+    .header .banner-bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('banner.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      z-index: 0;
+    }
+
+    .header .banner-overlay {
+      position: absolute;
+      inset: 0;
+      background: var(--banner-overlay);
+      z-index: 1;
+      transition: background 0.4s ease;
+    }
+
+    .header .header-content {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3px;
+      width: 100%;
+    }
+
+    .header h1 {
+      font-size: 22px;
+      font-weight: bold;
+      color: var(--banner-text);
+      letter-spacing: 1px;
+      line-height: 1.3;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6);
+    }
+
+    .header .subhead {
+      font-size: 14px;
+      font-weight: normal;
+      color: var(--banner-text);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      padding: 2px 10px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+      display: inline-block;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6);
+    }
+
+    .header .sub-en {
+      font-size: 10px;
+      color: rgba(255, 255, 255, 0.75);
+      letter-spacing: 2px;
+      margin-top: 4px;
+      text-transform: uppercase;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6);
+    }
+
+    [data-theme="burial"] .header .banner-bg {
+      display: none;
+    }
+
+    /* ===== 板块切换 ===== */
+    .board-switcher {
+      display: flex;
+      justify-content: center;
+      gap: 4px;
+      margin-bottom: 14px;
+      flex-wrap: wrap;
+    }
+
+    .board-tab {
+      border: 1px solid var(--card-border);
+      padding: 6px 18px;
+      font-size: 13px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.15s;
+      letter-spacing: 1px;
+      background: var(--tag-bg);
+      color: var(--tag-text);
+      font-family: inherit;
+    }
+
+    .board-tab:hover {
+      background: var(--accent);
+      color: var(--btn-text);
+    }
+
+    .board-tab.active {
+      background: var(--accent);
+      color: var(--btn-text);
+      border-color: var(--accent);
+      font-weight: bold;
+    }
+
+    /* ===== 密码门 ===== */
+    .password-gate {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 30px 0;
+    }
+
+    .password-gate.visible {
+      display: flex;
+    }
+
+    .password-box {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      padding: 30px 28px;
+      text-align: center;
+      max-width: 400px;
+      width: 100%;
+    }
+
+    .password-box h3 {
+      font-size: 16px;
+      color: var(--accent);
+      letter-spacing: 4px;
+      margin-bottom: 4px;
+      font-weight: bold;
+    }
+
+    .password-box .gate-sub {
+      font-size: 10px;
+      color: var(--text-muted);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+    }
+
+    .password-box input {
+      width: 100%;
+      border: 1px solid var(--input-border);
+      padding: 8px 12px;
+      font-size: 14px;
+      background: var(--input-bg);
+      color: var(--text);
+      outline: none;
+      transition: 0.15s;
+      text-align: center;
+      letter-spacing: 4px;
+      font-family: 'Courier New', monospace;
+      margin-bottom: 8px;
+      font-weight: bold;
+    }
+
+    .password-box input:focus {
+      border-color: var(--accent);
+    }
+
+    .password-box input::placeholder {
+      color: var(--text-light);
+      letter-spacing: 1px;
+      font-style: italic;
+      font-weight: normal;
+      font-family: inherit;
+    }
+
+    .gate-error {
+      font-size: 11px;
+      color: #cc3333;
+      min-height: 16px;
+      margin-bottom: 6px;
+      letter-spacing: 1px;
+      font-weight: bold;
+    }
+
+    .gate-btn {
+      width: 100%;
+      background: var(--btn-bg);
+      border: 1px solid var(--btn-border);
+      padding: 8px;
+      color: var(--btn-text);
+      font-weight: bold;
+      font-size: 13px;
+      cursor: pointer;
+      transition: 0.15s;
+      letter-spacing: 4px;
+      font-family: inherit;
+    }
+
+    .gate-btn:hover {
+      background: var(--btn-hover);
+    }
+
+    .gate-hint {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 12px;
+      letter-spacing: 1px;
+    }
+
+    .gate-hint .hint-tag {
+      background: var(--tag-bg);
+      color: var(--tag-text);
+      padding: 1px 8px;
+      border: 1px solid var(--tag-border);
+      font-size: 10px;
+      letter-spacing: 1px;
+      font-weight: bold;
+    }
+
+    /* ===== 主内容区 ===== */
+    #boardMain {
+      display: none;
+    }
+
+    #boardMain.visible {
+      display: block;
+    }
+
+    /* ===== 投稿卡片 ===== */
+    .post-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      padding: 16px;
+      margin-bottom: 16px;
+      transition: background 0.4s, border-color 0.4s;
+    }
+
+    .identity-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 12px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--divider);
+      flex-wrap: wrap;
+      transition: border-color 0.4s;
+    }
+
+    .avatar-uploader {
+      position: relative;
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
+      flex-shrink: 0;
+      overflow: hidden;
+      background: var(--tag-bg);
+      border: 1px dashed var(--input-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: 0.15s;
+    }
+
+    .avatar-uploader:hover {
+      border-color: var(--accent);
+      background: var(--card-header-bg);
+    }
+
+    .avatar-uploader.has-avatar {
+      border-style: solid;
+      border-color: var(--accent);
+    }
+
+    .avatar-preview {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      color: var(--text-muted);
+      font-weight: bold;
+      overflow: hidden;
+    }
+
+    .avatar-preview img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .nickname-input {
+      flex: 1;
+      min-width: 100px;
+      border: 1px solid var(--input-border);
+      padding: 5px 10px;
+      font-size: 12px;
+      background: var(--input-bg);
+      outline: none;
+      transition: 0.15s;
+      color: var(--text);
+      font-family: inherit;
+    }
+
+    .nickname-input:focus {
+      border-color: var(--accent);
+    }
+
+    .nickname-input::placeholder {
+      color: var(--text-light);
+      font-style: italic;
+    }
+
+    .identity-toggle {
+      display: flex;
+      gap: 2px;
+    }
+
+    .identity-btn {
+      border: 1px solid var(--tag-border);
+      background: var(--tag-bg);
+      padding: 4px 12px;
+      font-size: 11px;
+      font-weight: bold;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: 0.15s;
+      letter-spacing: 1px;
+      font-family: inherit;
+    }
+
+    .identity-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .identity-btn.active {
+      background: var(--accent);
+      color: var(--btn-text);
+      border-color: var(--accent);
+    }
+
+    .post-card textarea {
+      width: 100%;
+      border: 1px solid var(--input-border);
+      padding: 10px 12px;
+      font-size: 13px;
+      resize: vertical;
+      min-height: 80px;
+      background: var(--input-bg);
+      outline: none;
+      color: var(--text);
+      transition: 0.15s;
+      line-height: 1.6;
+      font-family: inherit;
+    }
+
+    .post-card textarea:focus {
+      border-color: var(--accent);
+    }
+
+    .post-card textarea::placeholder {
+      color: var(--text-light);
+      font-style: italic;
+    }
+
+    /* ===== 附加图片区域 ===== */
+    .attach-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .attach-btn {
+      background: var(--tag-bg);
+      border: 1px solid var(--tag-border);
+      color: var(--tag-text);
+      padding: 5px 14px;
+      font-size: 11px;
+      font-weight: bold;
+      cursor: pointer;
+      letter-spacing: 1px;
+      font-family: inherit;
+      transition: 0.15s;
+    }
+
+    .attach-btn:hover {
+      background: var(--card-header-bg);
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .attach-hint {
+      font-size: 10px;
+      color: var(--text-light);
+      font-style: italic;
+      letter-spacing: 1px;
+    }
+
+    .image-preview-area {
+      margin-top: 8px;
+      padding: 8px;
+      background: var(--comment-bg);
+      border: 1px solid var(--card-border);
+      display: none;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .image-preview-area.visible {
+      display: flex;
+    }
+
+    .image-preview-item {
+      position: relative;
+      width: 80px;
+      height: 80px;
+      border: 1px solid var(--card-border);
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .image-preview-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .image-remove-btn {
+      position: absolute;
+      top: 2px;
+      right: 2px;
+      width: 18px;
+      height: 18px;
+      background: rgba(0, 0, 0, 0.65);
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      font-size: 12px;
+      line-height: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: inherit;
+      padding: 0;
+    }
+
+    .image-remove-btn:hover {
+      background: #cc3333;
+    }
+
+    .image-preview-info {
+      font-size: 11px;
+      color: var(--text-muted);
+      letter-spacing: 1px;
+      line-height: 1.5;
+    }
+
+    .image-preview-info strong {
+      color: var(--accent);
+      display: block;
+      margin-bottom: 2px;
+    }
+
+    .post-actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 10px;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .anon-badge {
+      font-size: 11px;
+      color: var(--tag-text);
+      background: var(--tag-bg);
+      padding: 3px 10px;
+      border: 1px solid var(--tag-border);
+      font-weight: bold;
+      letter-spacing: 1px;
+      transition: 0.4s;
+    }
+
+    .btn {
+      background: var(--btn-bg);
+      border: 1px solid var(--btn-border);
+      padding: 6px 20px;
+      color: var(--btn-text);
+      font-weight: bold;
+      font-size: 12px;
+      cursor: pointer;
+      transition: 0.15s;
+      letter-spacing: 2px;
+      font-family: inherit;
+    }
+
+    .btn:hover {
+      background: var(--btn-hover);
+    }
+
+    .feed-title {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-bottom: 10px;
+      padding: 6px 10px;
+      background: var(--card-header-bg);
+      border: 1px solid var(--card-border);
+      transition: 0.4s;
+    }
+
+    .feed-title h2 {
+      color: var(--text);
+      font-size: 14px;
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
+
+    .feed-title span {
+      font-size: 11px;
+      color: var(--text-muted);
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
+
+    /* ===== 帖子 ===== */
+    .post-item {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      padding: 12px;
+      margin-bottom: 12px;
+      transition: 0.15s, background 0.4s, border-color 0.4s;
+    }
+
+    .post-item:hover {
+      border-color: var(--accent);
+    }
+
+    .post-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin-bottom: 8px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--divider);
+      transition: border-color 0.4s;
+    }
+
+    .avatar {
+      width: 40px;
+      height: 40px;
+      background: var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--btn-text);
+      font-weight: bold;
+      font-size: 14px;
+      flex-shrink: 0;
+      overflow: hidden;
+      border: 1px solid var(--card-border);
+      transition: 0.4s;
+    }
+
+    .avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .post-info {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      min-width: 0;
+      flex: 1;
+    }
+
+    .anon-name {
+      font-weight: bold;
+      color: var(--accent);
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+      transition: color 0.4s;
+    }
+
+    .identity-tag {
+      font-size: 10px;
+      background: var(--tag-bg);
+      color: var(--tag-text);
+      padding: 1px 6px;
+      border: 1px solid var(--tag-border);
+      font-weight: bold;
+      letter-spacing: 1px;
+      transition: 0.4s;
+    }
+
+    .identity-tag.repeater {
+      background: #e0c0c0;
+      color: #661111;
+      border-color: #a06060;
+    }
+
+    [data-theme="burial"] .identity-tag.repeater {
+      background: #3a1515;
+      color: #e08080;
+      border-color: #661111;
+    }
+
+    .post-time {
+      display: flex;
+      flex-direction: row;
+      gap: 8px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .relative-time {
+      font-size: 11px;
+      color: var(--text-muted);
+      font-weight: bold;
+      transition: color 0.4s;
+    }
+
+    .full-time {
+      font-size: 10px;
+      color: var(--text-light);
+      transition: color 0.4s;
+    }
+
+    .post-content {
+      font-size: 13px;
+      line-height: 1.7;
+      color: var(--text);
+      padding: 4px 0 10px 0;
+      word-break: break-word;
+      white-space: pre-wrap;
+      transition: color 0.4s;
+    }
+
+    /* 帖子内嵌图片 */
+    .post-image {
+      margin: 4px 0 10px 0;
+      max-width: 100%;
+    }
+
+    .post-image img {
+      max-width: 100%;
+      max-height: 400px;
+      display: block;
+      border: 1px solid var(--card-border);
+      cursor: zoom-in;
+      transition: 0.2s;
+    }
+
+    .post-image img:hover {
+      opacity: 0.92;
+      border-color: var(--accent);
+    }
+
+    .post-actions-bar {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      padding-top: 6px;
+      border-top: 1px solid var(--divider);
+      transition: border-color 0.4s;
+    }
+
+    .action-btn {
+      background: transparent;
+      border: 1px solid transparent;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 11px;
+      color: var(--text-muted);
+      cursor: pointer;
+      padding: 3px 10px;
+      transition: 0.15s;
+      font-weight: bold;
+      letter-spacing: 1px;
+      font-family: inherit;
+    }
+
+    .action-btn:hover {
+      border-color: var(--card-border);
+      color: var(--accent);
+      background: var(--card-header-bg);
+    }
+
+    .action-btn.liked {
+      color: var(--accent);
+      font-weight: bold;
+    }
+
+    /* ===== 图片查看器 ===== */
+    .image-viewer {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.9);
+      z-index: 2000;
+      align-items: center;
+      justify-content: center;
+      padding: 30px;
+      cursor: zoom-out;
+    }
+
+    .image-viewer.visible {
+      display: flex;
+    }
+
+    .image-viewer img {
+      max-width: 95%;
+      max-height: 95%;
+      display: block;
+      box-shadow: 0 0 40px rgba(0, 0, 0, 0.8);
+    }
+
+    /* ===== 评论区 ===== */
+    .comments-section {
+      margin-top: 10px;
+      padding-top: 8px;
+      border-top: 1px dashed var(--divider);
+      transition: 0.4s;
+    }
+
+    .comment-list {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 10px;
+      max-height: 400px;
+      overflow-y: auto;
+      padding-right: 4px;
+    }
+
+    .comment-item {
+      background: var(--comment-bg);
+      padding: 8px 10px;
+      font-size: 12px;
+      color: var(--text);
+      border-left: 3px solid var(--comment-border);
+      transition: 0.4s;
+    }
+
+    .comment-header {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 4px;
+      flex-wrap: wrap;
+    }
+
+    .comment-avatar {
+      width: 24px;
+      height: 24px;
+      background: var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--btn-text);
+      font-size: 10px;
+      font-weight: bold;
+      flex-shrink: 0;
+      overflow: hidden;
+      border: 1px solid var(--card-border);
+      transition: 0.4s;
+    }
+
+    .comment-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .comment-author {
+      font-weight: bold;
+      color: var(--accent);
+      font-size: 12px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      transition: color 0.4s;
+    }
+
+    .comment-author .identity-tag {
+      font-size: 9px;
+      padding: 0 5px;
+    }
+
+    .comment-time {
+      font-size: 10px;
+      color: var(--text-light);
+      font-weight: normal;
+      margin-left: auto;
+      transition: color 0.4s;
+    }
+
+    .comment-text {
+      line-height: 1.5;
+      word-break: break-word;
+      color: var(--text);
+      transition: color 0.4s;
+      padding-left: 30px;
+    }
+
+    .comment-actions {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      margin-top: 4px;
+      padding-left: 30px;
+    }
+
+    .reply-toggle-btn {
+      background: transparent;
+      border: 1px solid transparent;
+      font-size: 10px;
+      color: var(--text-muted);
+      cursor: pointer;
+      padding: 2px 8px;
+      transition: 0.15s;
+      font-weight: bold;
+      letter-spacing: 1px;
+      font-family: inherit;
+    }
+
+    .reply-toggle-btn:hover {
+      border-color: var(--card-border);
+      color: var(--accent);
+      background: var(--card-header-bg);
+    }
+
+    .reply-list {
+      margin-top: 6px;
+      margin-left: 12px;
+      padding-left: 10px;
+      border-left: 2px solid var(--card-border);
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .reply-item {
+      background: var(--card-header-bg);
+      padding: 6px 8px;
+      font-size: 11px;
+      color: var(--text);
+      border: 1px solid var(--card-border);
+      transition: 0.4s;
+    }
+
+    .reply-header {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      margin-bottom: 3px;
+      flex-wrap: wrap;
+    }
+
+    .reply-avatar {
+      width: 18px;
+      height: 18px;
+      background: var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--btn-text);
+      font-size: 9px;
+      font-weight: bold;
+      flex-shrink: 0;
+      overflow: hidden;
+      border: 1px solid var(--card-border);
+      transition: 0.4s;
+    }
+
+    .reply-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .reply-author {
+      font-weight: bold;
+      color: var(--accent);
+      font-size: 11px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      transition: color 0.4s;
+    }
+
+    .reply-author .identity-tag {
+      font-size: 9px;
+      padding: 0 4px;
+    }
+
+    .reply-time {
+      font-size: 10px;
+      color: var(--text-light);
+      margin-left: auto;
+      transition: color 0.4s;
+    }
+
+    .reply-text {
+      line-height: 1.45;
+      word-break: break-word;
+      padding-left: 23px;
+    }
+
+    .reply-form {
+      margin-top: 6px;
+      margin-left: 12px;
+      padding-left: 10px;
+      border-left: 2px solid var(--card-border);
+      display: flex;
+      gap: 6px;
+      align-items: center;
+    }
+
+    .reply-form input {
+      flex: 1;
+      border: 1px solid var(--input-border);
+      padding: 5px 10px;
+      font-size: 11px;
+      background: var(--input-bg);
+      outline: none;
+      transition: 0.15s;
+      color: var(--text);
+      font-family: inherit;
+    }
+
+    .reply-form input:focus {
+      border-color: var(--accent);
+    }
+
+    .reply-form input::placeholder {
+      color: var(--text-light);
+      font-style: italic;
+    }
+
+    .reply-submit {
+      background: var(--btn-bg);
+      border: 1px solid var(--btn-border);
+      padding: 5px 12px;
+      color: var(--btn-text);
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.15s;
+      font-size: 11px;
+      white-space: nowrap;
+      letter-spacing: 1px;
+      font-family: inherit;
+    }
+
+    .reply-submit:hover {
+      background: var(--btn-hover);
+    }
+
+    .comment-form {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+      margin-top: 6px;
+    }
+
+    .comment-form input {
+      flex: 1;
+      border: 1px solid var(--input-border);
+      padding: 6px 10px;
+      font-size: 12px;
+      background: var(--input-bg);
+      outline: none;
+      transition: 0.15s;
+      color: var(--text);
+      font-family: inherit;
+    }
+
+    .comment-form input:focus {
+      border-color: var(--accent);
+    }
+
+    .comment-form input::placeholder {
+      color: var(--text-light);
+      font-style: italic;
+    }
+
+    .comment-submit {
+      background: var(--btn-bg);
+      border: 1px solid var(--btn-border);
+      padding: 6px 16px;
+      color: var(--btn-text);
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.15s;
+      font-size: 12px;
+      white-space: nowrap;
+      letter-spacing: 1px;
+      font-family: inherit;
+    }
+
+    .comment-submit:hover {
+      background: var(--btn-hover);
+    }
+
+    .empty-feed {
+      text-align: center;
+      padding: 40px 20px;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      color: var(--text-muted);
+      font-size: 13px;
+      transition: 0.4s;
+    }
+
+    .empty-feed .empty-sub {
+      font-size: 11px;
+      color: var(--text-light);
+      margin-top: 6px;
+      letter-spacing: 1px;
+    }
+
+    .comment-list::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    .comment-list::-webkit-scrollbar-track {
+      background: var(--scroll-track);
+    }
+
+    .comment-list::-webkit-scrollbar-thumb {
+      background: var(--scroll-thumb);
+    }
+
+    .footer-note {
+      margin-top: 16px;
+      text-align: center;
+      font-size: 11px;
+      color: var(--text-muted);
+      letter-spacing: 1px;
+      padding: 10px 0;
+      border-top: 1px solid var(--divider);
+      transition: color 0.4s, border-color 0.4s;
+    }
+
+    /* ===== 头像裁剪弹窗 ===== */
+    .crop-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.65);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .crop-modal.visible {
+      display: flex;
+    }
+
+    .crop-dialog {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      padding: 20px;
+      max-width: 400px;
+      width: 100%;
+      transition: 0.4s;
+    }
+
+    .crop-dialog h3 {
+      font-size: 14px;
+      color: var(--accent);
+      margin-bottom: 4px;
+      letter-spacing: 1px;
+      font-weight: bold;
+    }
+
+    .crop-dialog .crop-sub {
+      font-size: 10px;
+      color: var(--text-muted);
+      letter-spacing: 1px;
+      margin-bottom: 14px;
+      text-transform: uppercase;
+    }
+
+    .crop-area {
+      width: 320px;
+      height: 320px;
+      max-width: 100%;
+      margin: 0 auto 12px;
+      position: relative;
+      background: #222;
+      overflow: hidden;
+      cursor: move;
+      user-select: none;
+      touch-action: none;
+      border: 1px solid var(--card-border);
+    }
+
+    .crop-area canvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    .crop-area::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border: 2px solid rgba(255, 255, 255, 0.6);
+      pointer-events: none;
+      box-shadow: 0 0 0 1000px rgba(0, 0, 0, 0.15) inset;
+    }
+
+    .crop-controls {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .crop-controls label {
+      font-size: 11px;
+      color: var(--text-muted);
+      font-weight: bold;
+      letter-spacing: 1px;
+      white-space: nowrap;
+    }
+
+    .crop-controls input[type=range] {
+      flex: 1;
+      accent-color: var(--accent);
+      cursor: pointer;
+    }
+
+    .crop-actions {
+      display: flex;
+      gap: 8px;
+      justify-content: flex-end;
+    }
+
+    .crop-btn {
+      padding: 6px 18px;
+      border: 1px solid var(--btn-border);
+      background: var(--tag-bg);
+      color: var(--tag-text);
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: bold;
+      letter-spacing: 1px;
+      font-family: inherit;
+      transition: 0.15s;
+    }
+
+    .crop-btn:hover {
+      background: var(--card-header-bg);
+    }
+
+    .crop-btn.primary {
+      background: var(--btn-bg);
+      color: var(--btn-text);
+      border-color: var(--btn-border);
+    }
+
+    .crop-btn.primary:hover {
+      background: var(--btn-hover);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .post-item {
+      animation: fadeIn 0.2s ease-out;
+    }
+
+    @media (max-width: 600px) {
+      body { padding: 8px 6px; }
+      .header { min-height: 120px; padding: 14px 10px; }
+      .header h1 { font-size: 16px; }
+      .header .subhead { font-size: 11px; letter-spacing: 2px; }
+      .header .sub-en { font-size: 9px; letter-spacing: 1px; }
+      .post-card { padding: 12px; }
+      .post-item { padding: 10px; }
+      .btn { padding: 5px 14px; font-size: 11px; }
+      .identity-row { gap: 6px; }
+      .identity-toggle { width: 100%; justify-content: center; }
+      .reply-list { margin-left: 6px; padding-left: 6px; }
+      .reply-form { margin-left: 6px; padding-left: 6px; }
+      .comment-time { margin-left: 0; width: 100%; }
+      .board-tab { padding: 5px 12px; font-size: 12px; }
+      .password-box { padding: 20px 16px; }
+      .comment-text, .comment-actions { padding-left: 0; }
+      .reply-text { padding-left: 0; }
+      .crop-area { width: 260px; height: 260px; }
+      .image-preview-info { font-size: 10px; }
+    }
+  </style>
+</head>
+<body data-theme="default">
+
+<div class="wall-container">
+  <div class="header" id="headerBanner">
+    <div class="banner-bg" id="bannerBg"></div>
+    <div class="banner-overlay"></div>
+    <div class="header-content">
+      <h1>私立久都瑠府高等学园</h1>
+      <div class="subhead" id="boardSubhead">匿名告白墙</div>
+      <p class="sub-en" id="boardSubEn">Private Kuto Ruhō High School · Anonymous Confession Wall</p>
+    </div>
+  </div>
+
+  <div class="board-switcher">
+    <button class="board-tab active" data-board="class1k">1年K班</button>
+    <button class="board-tab" data-board="burial">葬学部 [锁]</button>
+  </div>
+
+  <div class="password-gate" id="passwordGate">
+    <div class="password-box">
+      <h3>葬 学 部</h3>
+      <p class="gate-sub">Mortuary Department · Restricted</p>
+      <input type="password" id="passwordInput" placeholder="请输入数字暗号" inputmode="numeric" autocomplete="off" maxlength="10">
+      <div class="gate-error" id="gateError"></div>
+      <button class="gate-btn" id="gateSubmitBtn">进 入</button>
+      <p class="gate-hint">
+        <span class="hint-tag">数字</span> 暗号为 7 位数字
+      </p>
+    </div>
+  </div>
+
+  <div id="boardMain">
+    <div class="post-card">
+      <div class="identity-row">
+        <div class="avatar-uploader" id="avatarUploader" title="点击上传/更换头像">
+          <div class="avatar-preview" id="avatarPreview">
+            <span id="avatarPlaceholder">+</span>
+            <img id="avatarPreviewImg" src="" alt="" style="display:none;">
+          </div>
+          <input type="file" id="avatarFileInput" accept="image/*" hidden>
+        </div>
+        <input type="text" id="nicknameInput" class="nickname-input" placeholder="昵称（留空则匿名）" maxlength="20" autocomplete="off">
+        <div class="identity-toggle" id="identityToggle">
+          <button class="identity-btn" data-identity="freshman">新生</button>
+          <button class="identity-btn" data-identity="repeater">留级生</button>
+        </div>
+      </div>
+      <textarea id="postContent" placeholder="在这里写下你的心事、表白或悄悄话……" maxlength="500"></textarea>
+
+      <!-- 附加图片 -->
+      <div class="attach-row">
+        <button type="button" class="attach-btn" id="attachImageBtn">+ 附加图片</button>
+        <span class="attach-hint">可选 · 支持 jpg / png · 自动压缩</span>
+        <input type="file" id="postImageInput" accept="image/*" hidden>
+      </div>
+
+      <div class="image-preview-area" id="imagePreviewArea">
+        <div class="image-preview-item">
+          <img id="postImagePreview" src="" alt="">
+          <button type="button" class="image-remove-btn" id="removeImageBtn" title="移除图片">×</button>
+        </div>
+        <div class="image-preview-info">
+          <strong>图片已附加</strong>
+          发布后将随投稿一起显示
+        </div>
+      </div>
+
+      <div class="post-actions">
+        <div class="anon-badge">完全匿名 · 无需登录</div>
+        <button class="btn" id="submitPostBtn">发布投稿</button>
+      </div>
+    </div>
+
+    <div class="feed-title">
+      <h2 id="feedTitle">最新告白</h2>
+      <span id="postCount">0 条投稿</span>
+    </div>
+
+    <div id="postsContainer"></div>
+
+    <div class="footer-note" id="footerNote">善意发言 · 温暖校园</div>
+  </div>
+</div>
+
+<!-- 头像裁剪弹窗 -->
+<div class="crop-modal" id="cropModal">
+  <div class="crop-dialog">
+    <h3>裁剪头像</h3>
+    <p class="crop-sub">拖动图片调整位置 · 滑动滑块缩放</p>
+    <div class="crop-area" id="cropArea">
+      <canvas id="cropCanvas" width="320" height="320"></canvas>
+    </div>
+    <div class="crop-controls">
+      <label>缩放</label>
+      <input type="range" id="cropZoom" min="1" max="3" step="0.01" value="1">
+    </div>
+    <div class="crop-actions">
+      <button class="crop-btn" id="cropCancel">取消</button>
+      <button class="crop-btn primary" id="cropConfirm">确认裁剪</button>
+    </div>
+  </div>
+</div>
+
+<!-- 图片查看器 -->
+<div class="image-viewer" id="imageViewer">
+  <img id="imageViewerImg" src="" alt="">
+</div>
+
+<script>
+  (function() {
+    'use strict';
+
+    /* ============================================================
+       板块配置
+       ============================================================ */
+    const BOARDS = {
+      class1k: {
+        id: 'class1k',
+        name: '1年K班',
+        subhead: '匿名告白墙',
+        subEn: 'Private Kuto Ruhō High School · Anonymous Confession Wall',
+        feedTitle: '最新告白',
+        footer: '善意发言 · 温暖校园',
+        storageKey: 'kutoru_wall_class1k_posts_v7',
+        nicknameKey: 'kutoru_wall_class1k_nickname_v7',
+        identityKey: 'kutoru_wall_class1k_identity_v7',
+        avatarKey: 'kutoru_wall_class1k_avatar_v7',
+        theme: 'default',
+        avatarChar: '匿',
+        locked: false,
+        allowedIdentities: ['freshman', 'repeater']
+      },
+      burial: {
+        id: 'burial',
+        name: '葬学部',
+        subhead: '葬 学 部 · 社团悄悄话',
+        subEn: 'Mortuary Department · Club Whispers',
+        feedTitle: '社团悄悄话',
+        footer: '此间之语 · 不留痕迹',
+        storageKey: 'kutoru_wall_burial_posts_v7',
+        nicknameKey: 'kutoru_wall_burial_nickname_v7',
+        identityKey: 'kutoru_wall_burial_identity_v7',
+        avatarKey: 'kutoru_wall_burial_avatar_v7',
+        theme: 'burial',
+        avatarChar: '葬',
+        locked: true,
+        password: '2026666',
+        allowedIdentities: ['repeater']
+      }
+    };
+
+    const IDENTITIES = {
+      freshman: { label: '新生', key: 'freshman' },
+      repeater: { label: '留级生', key: 'repeater' }
+    };
+
+    const state = {
+      currentBoard: 'class1k',
+      unlocked: new Set(JSON.parse(sessionStorage.getItem('kutoru_unlocked') || '[]')),
+      nickname: '',
+      identity: 'freshman',
+      avatar: '',
+      posts: [],
+      pendingImage: null,   // 待发布的图片
+      openCommentSections: new Set(),
+      openReplyForms: new Set()
+    };
+
+    const dom = {
+      body: document.body,
+      headerBanner: document.getElementById('headerBanner'),
+      bannerBg: document.getElementById('bannerBg'),
+      boardTabs: document.querySelectorAll('.board-tab'),
+      passwordGate: document.getElementById('passwordGate'),
+      passwordInput: document.getElementById('passwordInput'),
+      gateError: document.getElementById('gateError'),
+      gateSubmitBtn: document.getElementById('gateSubmitBtn'),
+      boardMain: document.getElementById('boardMain'),
+      boardSubhead: document.getElementById('boardSubhead'),
+      boardSubEn: document.getElementById('boardSubEn'),
+      feedTitle: document.getElementById('feedTitle'),
+      footerNote: document.getElementById('footerNote'),
+      nicknameInput: document.getElementById('nicknameInput'),
+      identityToggle: document.getElementById('identityToggle'),
+      postContent: document.getElementById('postContent'),
+      submitPostBtn: document.getElementById('submitPostBtn'),
+      postsContainer: document.getElementById('postsContainer'),
+      postCount: document.getElementById('postCount'),
+      avatarUploader: document.getElementById('avatarUploader'),
+      avatarPreviewImg: document.getElementById('avatarPreviewImg'),
+      avatarPlaceholder: document.getElementById('avatarPlaceholder'),
+      avatarFileInput: document.getElementById('avatarFileInput'),
+      // 帖子图片
+      attachImageBtn: document.getElementById('attachImageBtn'),
+      postImageInput: document.getElementById('postImageInput'),
+      imagePreviewArea: document.getElementById('imagePreviewArea'),
+      postImagePreview: document.getElementById('postImagePreview'),
+      removeImageBtn: document.getElementById('removeImageBtn'),
+      // 图片查看器
+      imageViewer: document.getElementById('imageViewer'),
+      imageViewerImg: document.getElementById('imageViewerImg')
+    };
+
+    /* ============================================================
+       工具函数
+       ============================================================ */
+    function formatRelativeTime(ts) {
+      const diff = Date.now() - ts;
+      const m = Math.floor(diff / 60000);
+      const h = Math.floor(diff / 3600000);
+      const d = Math.floor(diff / 86400000);
+      if (m < 1) return '刚刚';
+      if (m < 60) return m + '分钟前';
+      if (h < 24) return h + '小时前';
+      if (d < 7) return d + '天前';
+      return new Date(ts).toLocaleDateString('zh-CN', { month: 'short', day: 'numeric' });
+    }
+
+    function formatFullTime(ts) {
+      const d = new Date(ts);
+      const p = n => String(n).padStart(2, '0');
+      return `${d.getFullYear()}-${p(d.getMonth() + 1)}-${p(d.getDate())} ${p(d.getHours())}:${p(d.getMinutes())}`;
+    }
+
+    function generateId(prefix) {
+      return (prefix || '') + Date.now() + '_' + Math.random().toString(36).substr(2, 8);
+    }
+
+    function escapeHTML(str) {
+      return String(str).replace(/[&<>"]/g, m => ({
+        '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;'
+      })[m]);
+    }
+
+    function getDisplayName() {
+      return state.nickname.trim() || '匿名同学';
+    }
+
+    function getIdentityLabel(key) {
+      return (IDENTITIES[key] || IDENTITIES.freshman).label;
+    }
+
+    /* ============================================================
+       图片压缩（帖子用，保留宽高比）
+       ============================================================ */
+    function compressPostImage(file, maxWidth) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = e => {
+          const img = new Image();
+          img.onload = () => {
+            try {
+              let w = img.width;
+              let h = img.height;
+              if (w > maxWidth) {
+                h = Math.round(h * (maxWidth / w));
+                w = maxWidth;
+              }
+              const canvas = document.createElement('canvas');
+              canvas.width = w;
+              canvas.height = h;
+              const ctx = canvas.getContext('2d');
+              ctx.drawImage(img, 0, 0, w, h);
+              resolve(canvas.toDataURL('image/jpeg', 0.72));
+            } catch (err) {
+              reject(err);
+            }
+          };
+          img.onerror = reject;
+          img.src = e.target.result;
+        };
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
+      });
+    }
+
+    /* ============================================================
+       头像裁剪
+       ============================================================ */
+    const crop = {
+      resolve: null,
+      img: null,
+      baseScale: 1,
+      scale: 1,
+      offsetX: 0,
+      offsetY: 0,
+      dragging: false,
+      startX: 0,
+      startY: 0,
+      canvasSize: 320
+    };
+
+    function openCropModal(file) {
+      return new Promise((resolve) => {
+        crop.resolve = resolve;
+        const reader = new FileReader();
+        reader.onload = e => {
+          const img = new Image();
+          img.onload = () => {
+            crop.img = img;
+            const size = crop.canvasSize;
+            crop.baseScale = Math.max(size / img.width, size / img.height);
+            crop.scale = 1;
+            crop.offsetX = 0;
+            crop.offsetY = 0;
+            crop.dragging = false;
+            document.getElementById('cropZoom').value = 1;
+            drawCropCanvas();
+            document.getElementById('cropModal').classList.add('visible');
+          };
+          img.onerror = () => closeCropModal(null);
+          img.src = e.target.result;
+        };
+        reader.onerror = () => closeCropModal(null);
+        reader.readAsDataURL(file);
+      });
+    }
+
+    function closeCropModal(result) {
+      document.getElementById('cropModal').classList.remove('visible');
+      crop.img = null;
+      if (crop.resolve) {
+        crop.resolve(result);
+        crop.resolve = null;
+      }
+    }
+
+    function drawCropCanvas() {
+      const canvas = document.getElementById('cropCanvas');
+      if (!canvas || !crop.img) return;
+      const ctx = canvas.getContext('2d');
+      const size = crop.canvasSize;
+      canvas.width = size;
+      canvas.height = size;
+      ctx.clearRect(0, 0, size, size);
+      ctx.fillStyle = '#222';
+      ctx.fillRect(0, 0, size, size);
+
+      const total = crop.baseScale * crop.scale;
+      const dw = crop.img.width * total;
+      const dh = crop.img.height * total;
+      const dx = (size - dw) / 2 + crop.offsetX;
+      const dy = (size - dh) / 2 + crop.offsetY;
+
+      ctx.drawImage(crop.img, dx, dy, dw, dh);
+    }
+
+    function clampCropOffset() {
+      if (!crop.img) return;
+      const size = crop.canvasSize;
+      const total = crop.baseScale * crop.scale;
+      const dw = crop.img.width * total;
+      const dh = crop.img.height * total;
+      const maxX = Math.max(0, (dw - size) / 2);
+      const maxY = Math.max(0, (dh - size) / 2);
+      crop.offsetX = Math.max(-maxX, Math.min(maxX, crop.offsetX));
+      crop.offsetY = Math.max(-maxY, Math.min(maxY, crop.offsetY));
+    }
+
+    function confirmCrop() {
+      if (!crop.img) return null;
+      const size = crop.canvasSize;
+      const total = crop.baseScale * crop.scale;
+      const dw = crop.img.width * total;
+      const dh = crop.img.height * total;
+      const dx = (size - dw) / 2 + crop.offsetX;
+      const dy = (size - dh) / 2 + crop.offsetY;
+
+      const srcX = (0 - dx) / total;
+      const srcY = (0 - dy) / total;
+      const srcW = size / total;
+      const srcH = size / total;
+
+      const out = document.createElement('canvas');
+      out.width = 80;
+      out.height = 80;
+      const octx = out.getContext('2d');
+      octx.drawImage(crop.img, srcX, srcY, srcW, srcH, 0, 0, 80, 80);
+      return out.toDataURL('image/jpeg', 0.85);
+    }
+
+    function initCropEvents() {
+      const canvas = document.getElementById('cropCanvas');
+      const zoom = document.getElementById('cropZoom');
+
+      canvas.addEventListener('pointerdown', e => {
+        if (!crop.img) return;
+        e.preventDefault();
+        crop.dragging = true;
+        crop.startX = e.clientX - crop.offsetX;
+        crop.startY = e.clientY - crop.offsetY;
+        try { canvas.setPointerCapture(e.pointerId); } catch (err) {}
+      });
+
+      canvas.addEventListener('pointermove', e => {
+        if (!crop.dragging || !crop.img) return;
+        e.preventDefault();
+        crop.offsetX = e.clientX - crop.startX;
+        crop.offsetY = e.clientY - crop.startY;
+        clampCropOffset();
+        drawCropCanvas();
+      });
+
+      const stopDrag = e => {
+        crop.dragging = false;
+        try { canvas.releasePointerCapture(e.pointerId); } catch (err) {}
+      };
+      canvas.addEventListener('pointerup', stopDrag);
+      canvas.addEventListener('pointercancel', stopDrag);
+      canvas.addEventListener('lostpointercapture', () => { crop.dragging = false; });
+
+      zoom.addEventListener('input', e => {
+        if (!crop.img) return;
+        const oldScale = crop.scale;
+        const newScale = parseFloat(e.target.value) || 1;
+        const ratio = newScale / oldScale;
+        crop.scale = newScale;
+        crop.offsetX *= ratio;
+        crop.offsetY *= ratio;
+        clampCropOffset();
+        drawCropCanvas();
+      });
+
+      document.getElementById('cropCancel').addEventListener('click', () => {
+        closeCropModal(null);
+      });
+
+      document.getElementById('cropConfirm').addEventListener('click', () => {
+        const dataUrl = confirmCrop();
+        closeCropModal(dataUrl);
+      });
+
+      document.addEventListener('keydown', e => {
+        if (e.key === 'Escape' && document.getElementById('cropModal').classList.contains('visible')) {
+          closeCropModal(null);
+        }
+      });
+    }
+
+    /* ============================================================
+       数据加载 / 保存
+       ============================================================ */
+    function loadBoardData(boardId) {
+      const board = BOARDS[boardId];
+
+      state.nickname = localStorage.getItem(board.nicknameKey) || '';
+      state.identity = localStorage.getItem(board.identityKey) || 'freshman';
+      if (board.id === 'burial') state.identity = 'repeater';
+      state.avatar = localStorage.getItem(board.avatarKey) || '';
+
+      const stored = localStorage.getItem(board.storageKey);
+      let posts = null;
+      if (stored) {
+        try { posts = JSON.parse(stored); } catch (e) { posts = null; }
+      }
+      if (!Array.isArray(posts)) posts = [];
+      posts.forEach(p => {
+        if (!p.comments) p.comments = [];
+        if (p.liked === undefined) p.liked = false;
+        if (!p.author) p.author = '匿名同学';
+        if (!p.identity) p.identity = 'freshman';
+        p.comments.forEach(c => {
+          if (!c.author) c.author = '匿名同学';
+          if (!c.identity) c.identity = 'freshman';
+          if (!c.timestamp) c.timestamp = p.timestamp;
+          if (!c.replies) c.replies = [];
+          c.replies.forEach(r => {
+            if (!r.author) r.author = '匿名同学';
+            if (!r.identity) r.identity = 'freshman';
+            if (!r.timestamp) r.timestamp = c.timestamp;
+          });
+        });
+      });
+      posts.sort((a, b) => b.timestamp - a.timestamp);
+      state.posts = posts;
+
+      state.openCommentSections.clear();
+      state.openReplyForms.clear();
+    }
+
+    function saveBoardData() {
+      const board = BOARDS[state.currentBoard];
+      try {
+        localStorage.setItem(board.storageKey, JSON.stringify(state.posts));
+        localStorage.setItem(board.nicknameKey, state.nickname);
+        localStorage.setItem(board.identityKey, state.identity);
+        localStorage.setItem(board.avatarKey, state.avatar);
+        return true;
+      } catch (e) {
+        alert('存储空间不足，请删除一些带图片的旧帖子后再试。');
+        return false;
+      }
+    }
+
+    function persistUnlocked() {
+      sessionStorage.setItem('kutoru_unlocked', JSON.stringify(Array.from(state.unlocked)));
+    }
+
+    function applyTheme(boardId) {
+      const board = BOARDS[boardId];
+      dom.body.dataset.theme = board.theme;
+      dom.bannerBg.style.display = boardId === 'class1k' ? 'block' : 'none';
+    }
+
+    /* ============================================================
+       头像渲染
+       ============================================================ */
+    function renderPostAvatarHtml(post, board) {
+      if (post.avatar) return `<div class="avatar"><img src="${post.avatar}" alt=""></div>`;
+      return `<div class="avatar">${board.avatarChar}</div>`;
+    }
+
+    function renderCommentAvatarHtml(comment, board) {
+      if (comment.avatar) return `<div class="comment-avatar"><img src="${comment.avatar}" alt=""></div>`;
+      return `<div class="comment-avatar">${board.avatarChar}</div>`;
+    }
+
+    function renderReplyAvatarHtml(reply, board) {
+      if (reply.avatar) return `<div class="reply-avatar"><img src="${reply.avatar}" alt=""></div>`;
+      return `<div class="reply-avatar">${board.avatarChar}</div>`;
+    }
+
+    function syncAvatarUI() {
+      if (state.avatar) {
+        dom.avatarPreviewImg.src = state.avatar;
+        dom.avatarPreviewImg.style.display = 'block';
+        dom.avatarPlaceholder.style.display = 'none';
+        dom.avatarUploader.classList.add('has-avatar');
+      } else {
+        dom.avatarPreviewImg.src = '';
+        dom.avatarPreviewImg.style.display = 'none';
+        dom.avatarPlaceholder.style.display = 'block';
+        dom.avatarUploader.classList.remove('has-avatar');
+      }
+    }
+
+    async function handleAvatarFile(file) {
+      if (!file) return;
+      if (!file.type.startsWith('image/')) {
+        alert('请上传图片文件（jpg / png / gif 等）');
+        return;
+      }
+      if (file.size > 8 * 1024 * 1024) {
+        alert('图片不能超过 8MB');
+        return;
+      }
+      try {
+        const cropped = await openCropModal(file);
+        if (cropped) {
+          state.avatar = cropped;
+          saveBoardData();
+          syncAvatarUI();
+        }
+      } catch (err) {
+        alert('图片处理失败，请重试');
+      }
+    }
+
+    /* ============================================================
+       帖子图片附件
+       ============================================================ */
+    function syncPendingImageUI() {
+      if (state.pendingImage) {
+        dom.postImagePreview.src = state.pendingImage;
+        dom.imagePreviewArea.classList.add('visible');
+      } else {
+        dom.postImagePreview.src = '';
+        dom.imagePreviewArea.classList.remove('visible');
+      }
+    }
+
+    async function handlePostImageFile(file) {
+      if (!file) return;
+      if (!file.type.startsWith('image/')) {
+        alert('请上传图片文件（jpg / png / gif 等）');
+        return;
+      }
+      if (file.size > 8 * 1024 * 1024) {
+        alert('图片不能超过 8MB');
+        return;
+      }
+      try {
+        const compressed = await compressPostImage(file, 600);
+        state.pendingImage = compressed;
+        syncPendingImageUI();
+      } catch (err) {
+        alert('图片处理失败，请重试');
+      }
+    }
+
+    /* ============================================================
+       渲染帖子列表
+       ============================================================ */
+    function renderPosts() {
+      const board = BOARDS[state.currentBoard];
+
+      dom.boardSubhead.textContent = board.subhead;
+      dom.boardSubEn.textContent = board.subEn;
+      dom.feedTitle.textContent = board.feedTitle;
+      dom.footerNote.textContent = board.footer;
+      dom.postCount.textContent = state.posts.length + ' 条投稿';
+
+      if (state.posts.length === 0) {
+        const isBurial = board.theme === 'burial';
+        dom.postsContainer.innerHTML = `
+          <div class="empty-feed">
+            ${isBurial ? '社团里还没有悄悄话' : '还没有投稿'}
+            <div class="empty-sub">${isBurial ? '以暗为墨 · 以夜为纸' : '点击上方输入框即可发布'}</div>
+          </div>
+        `;
+        return;
+      }
+
+      let html = '';
+      state.posts.forEach(post => {
+        const relTime = formatRelativeTime(post.timestamp);
+        const fullTime = formatFullTime(post.timestamp);
+        const likedClass = post.liked ? 'liked' : '';
+        const likeText = post.liked ? '已赞' : '赞';
+        const authorDisplay = escapeHTML(post.author || '匿名同学');
+        const identityLabel = getIdentityLabel(post.identity);
+        const identityClass = post.identity === 'repeater' ? 'repeater' : '';
+        const postAvatarHtml = renderPostAvatarHtml(post, board);
+
+        // 帖子图片
+        let postImageHtml = '';
+        if (post.image) {
+          postImageHtml = `<div class="post-image"><img src="${post.image}" alt="投稿图片" class="post-image-img" data-src="${post.image}"></div>`;
+        }
+
+        // 评论
+        let commentsHtml = '';
+        if (post.comments && post.comments.length > 0) {
+          post.comments.forEach(comment => {
+            const cRelTime = formatRelativeTime(comment.timestamp);
+            const cFullTime = formatFullTime(comment.timestamp);
+            const cAuthor = escapeHTML(comment.author || '匿名同学');
+            const cIdentity = getIdentityLabel(comment.identity);
+            const cIdentityClass = comment.identity === 'repeater' ? 'repeater' : '';
+            const replyFormOpen = state.openReplyForms.has(comment.id);
+            const commentAvatarHtml = renderCommentAvatarHtml(comment, board);
+
+            let repliesHtml = '';
+            if (comment.replies && comment.replies.length > 0) {
+              repliesHtml = '<div class="reply-list">';
+              comment.replies.forEach(reply => {
+                const rRelTime = formatRelativeTime(reply.timestamp);
+                const rFullTime = formatFullTime(reply.timestamp);
+                const rIdentityClass = reply.identity === 'repeater' ? 'repeater' : '';
+                const replyAvatarHtml = renderReplyAvatarHtml(reply, board);
+                repliesHtml += `
+                  <div class="reply-item">
+                    <div class="reply-header">
+                      ${replyAvatarHtml}
+                      <span class="reply-author">
+                        ${escapeHTML(reply.author || '匿名同学')}
+                        <span class="identity-tag ${rIdentityClass}">${getIdentityLabel(reply.identity)}</span>
+                      </span>
+                      <span class="reply-time" title="${rFullTime}">${rRelTime}</span>
+                    </div>
+                    <div class="reply-text">${escapeHTML(reply.text)}</div>
+                  </div>
+                `;
+              });
+              repliesHtml += '</div>';
+            }
+
+            const replyFormHtml = replyFormOpen ? `
+              <div class="reply-form">
+                <input type="text" id="reply-input-${comment.id}" placeholder="回复 ${cAuthor} ..." maxlength="200">
+                <button class="reply-submit" data-post-id="${post.id}" data-comment-id="${comment.id}">回复</button>
+              </div>
+            ` : '';
+
+            commentsHtml += `
+              <div class="comment-item">
+                <div class="comment-header">
+                  ${commentAvatarHtml}
+                  <span class="comment-author">
+                    ${cAuthor}
+                    <span class="identity-tag ${cIdentityClass}">${cIdentity}</span>
+                  </span>
+                  <span class="comment-time" title="${cFullTime}">${cRelTime}</span>
+                </div>
+                <div class="comment-text">${escapeHTML(comment.text)}</div>
+                <div class="comment-actions">
+                  <button class="reply-toggle-btn" data-post-id="${post.id}" data-comment-id="${comment.id}">
+                    ${replyFormOpen ? '取消回复' : '回复'}
+                  </button>
+                </div>
+                ${repliesHtml}
+                ${replyFormHtml}
+              </div>
+            `;
+          });
+        } else {
+          commentsHtml = `<div style="padding: 6px 4px; color: var(--text-light); font-size: 12px; font-style: italic; padding-left: 30px;">还没有评论，快来抢沙发</div>`;
+        }
+
+        const sectionOpen = state.openCommentSections.has(post.id);
+
+        html += `
+          <div class="post-item" data-post-id="${post.id}">
+            <div class="post-header">
+              ${postAvatarHtml}
+              <div class="post-info">
+                <div class="anon-name">
+                  ${authorDisplay}
+                  <span class="identity-tag ${identityClass}">${identityLabel}</span>
+                </div>
+                <div class="post-time">
+                  <span class="relative-time">${relTime}</span>
+                  <span class="full-time" title="完整投稿时间">${fullTime}</span>
+                </div>
+              </div>
+            </div>
+            <div class="post-content">${escapeHTML(post.content)}</div>
+            ${postImageHtml}
+            <div class="post-actions-bar">
+              <button class="action-btn like-btn ${likedClass}" data-post-id="${post.id}">
+                ${likeText} <span class="like-count">${post.likes || 0}</span>
+              </button>
+              <button class="action-btn comment-toggle-btn" data-post-id="${post.id}">
+                评论 (${post.comments ? post.comments.length : 0})
+              </button>
+            </div>
+            <div class="comments-section" id="comments-${post.id}" style="display: ${sectionOpen ? 'block' : 'none'};">
+              <div class="comment-list" id="comment-list-${post.id}">
+                ${commentsHtml}
+              </div>
+              <div class="comment-form">
+                <input type="text" id="comment-input-${post.id}" placeholder="写下你的评论... (匿名)" maxlength="200">
+                <button class="comment-submit" data-post-id="${post.id}">发送</button>
+              </div>
+            </div>
+          </div>
+        `;
+      });
+
+      dom.postsContainer.innerHTML = html;
+      bindPostEvents();
+      bindImageZoom();
+    }
+
+    /* ============================================================
+       图片查看器
+       ============================================================ */
+    function bindImageZoom() {
+      document.querySelectorAll('.post-image-img').forEach(img => {
+        img.addEventListener('click', () => {
+          const src = img.dataset.src || img.src;
+          dom.imageViewerImg.src = src;
+          dom.imageViewer.classList.add('visible');
+        });
+      });
+    }
+
+    function initImageViewer() {
+      dom.imageViewer.addEventListener('click', () => {
+        dom.imageViewer.classList.remove('visible');
+        dom.imageViewerImg.src = '';
+      });
+      document.addEventListener('keydown', e => {
+        if (e.key === 'Escape' && dom.imageViewer.classList.contains('visible')) {
+          dom.imageViewer.classList.remove('visible');
+          dom.imageViewerImg.src = '';
+        }
+      });
+    }
+
+    /* ============================================================
+       帖子事件
+       ============================================================ */
+    function bindPostEvents() {
+      document.querySelectorAll('.like-btn').forEach(btn => {
+        btn.addEventListener('click', e => {
+          e.stopPropagation();
+          const postId = btn.dataset.postId;
+          const post = state.posts.find(p => p.id === postId);
+          if (!post) return;
+          if (post.liked) {
+            post.likes = Math.max(0, (post.likes || 0) - 1);
+            post.liked = false;
+          } else {
+            post.likes = (post.likes || 0) + 1;
+            post.liked = true;
+          }
+          saveBoardData();
+          renderPosts();
+        });
+      });
+
+      document.querySelectorAll('.comment-toggle-btn').forEach(btn => {
+        btn.addEventListener('click', e => {
+          e.stopPropagation();
+          const postId = btn.dataset.postId;
+          const section = document.getElementById('comments-' + postId);
+          if (!section) return;
+          if (section.style.display === 'none' || !section.style.display) {
+            section.style.display = 'block';
+            state.openCommentSections.add(postId);
+            const input = document.getElementById('comment-input-' + postId);
+            if (input) input.focus();
+          } else {
+            section.style.display = 'none';
+            state.openCommentSections.delete(postId);
+          }
+        });
+      });
+
+      document.querySelectorAll('.comment-submit').forEach(btn => {
+        btn.addEventListener('click', e => {
+          e.stopPropagation();
+          const postId = btn.dataset.postId;
+          const input = document.getElementById('comment-input-' + postId);
+          if (!input) return;
+          const text = input.value.trim();
+          if (!text) { alert('请写下评论内容再发送'); return; }
+
+          const post = state.posts.find(p => p.id === postId);
+          if (!post) return;
+          if (!post.comments) post.comments = [];
+          post.comments.push({
+            id: generateId('comment_'),
+            author: getDisplayName(),
+            identity: state.identity,
+            avatar: state.avatar || null,
+            text: text,
+            timestamp: Date.now(),
+            replies: []
+          });
+          saveBoardData();
+          input.value = '';
+          state.openCommentSections.add(postId);
+          renderPosts();
+          const sec = document.getElementById('comments-' + postId);
+          if (sec) sec.style.display = 'block';
+          setTimeout(() => {
+            const list = document.getElementById('comment-list-' + postId);
+            if (list) list.scrollTop = list.scrollHeight;
+          }, 50);
+        });
+      });
+
+      document.querySelectorAll('.comment-form input').forEach(input => {
+        input.addEventListener('keypress', e => {
+          if (e.key === 'Enter') {
+            e.preventDefault();
+            const postId = input.id.replace('comment-input-', '');
+            const btn = document.querySelector(`.comment-submit[data-post-id="${postId}"]`);
+            if (btn) btn.click();
+          }
+        });
+      });
+
+      document.querySelectorAll('.reply-toggle-btn').forEach(btn => {
+        btn.addEventListener('click', e => {
+          e.stopPropagation();
+          const commentId = btn.dataset.commentId;
+          const postId = btn.dataset.postId;
+          if (state.openReplyForms.has(commentId)) {
+            state.openReplyForms.delete(commentId);
+          } else {
+            state.openReplyForms.add(commentId);
+            state.openCommentSections.add(postId);
+          }
+          renderPosts();
+          if (state.openReplyForms.has(commentId)) {
+            setTimeout(() => {
+              const inp = document.getElementById('reply-input-' + commentId);
+              if (inp) inp.focus();
+            }, 30);
+          }
+        });
+      });
+
+      document.querySelectorAll('.reply-submit').forEach(btn => {
+        btn.addEventListener('click', e => {
+          e.stopPropagation();
+          const postId = btn.dataset.postId;
+          const commentId = btn.dataset.commentId;
+          const input = document.getElementById('reply-input-' + commentId);
+          if (!input) return;
+          const text = input.value.trim();
+          if (!text) { alert('请写下回复内容再发送'); return; }
+
+          const post = state.posts.find(p => p.id === postId);
+          if (!post) return;
+          const comment = post.comments.find(c => c.id === commentId);
+          if (!comment) return;
+          if (!comment.replies) comment.replies = [];
+          comment.replies.push({
+            id: generateId('reply_'),
+            author: getDisplayName(),
+            identity: state.identity,
+            avatar: state.avatar || null,
+            text: text,
+            timestamp: Date.now()
+          });
+          saveBoardData();
+          state.openCommentSections.add(postId);
+          state.openReplyForms.delete(commentId);
+          renderPosts();
+          const sec = document.getElementById('comments-' + postId);
+          if (sec) sec.style.display = 'block';
+          setTimeout(() => {
+            const list = document.getElementById('comment-list-' + postId);
+            if (list) list.scrollTop = list.scrollHeight;
+          }, 50);
+        });
+      });
+
+      document.querySelectorAll('.reply-form input').forEach(input => {
+        input.addEventListener('keypress', e => {
+          if (e.key === 'Enter') {
+            e.preventDefault();
+            const commentId = input.id.replace('reply-input-', '');
+            const btn = document.querySelector(`.reply-submit[data-comment-id="${commentId}"]`);
+            if (btn) btn.click();
+          }
+        });
+      });
+    }
+
+    /* ============================================================
+       发布新投稿
+       ============================================================ */
+    function addNewPost() {
+      const content = dom.postContent.value.trim();
+      if (!content && !state.pendingImage) {
+        alert('写点内容或附加一张图片再发布吧');
+        return;
+      }
+      if (content.length > 500) { alert('内容太长啦，最多500字'); return; }
+
+      const newPost = {
+        id: generateId('post_'),
+        author: getDisplayName(),
+        identity: state.identity,
+        avatar: state.avatar || null,
+        content: content || '(图片投稿)',
+        image: state.pendingImage || null,
+        timestamp: Date.now(),
+        likes: 0,
+        liked: false,
+        comments: []
+      };
+
+      state.posts.unshift(newPost);
+
+      if (!saveBoardData()) {
+        // 存储失败，回滚
+        state.posts.shift();
+        return;
+      }
+
+      dom.postContent.value = '';
+      state.pendingImage = null;
+      syncPendingImageUI();
+      renderPosts();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    /* ============================================================
+       昵称 / 身份 / 头像 UI
+       ============================================================ */
+    function syncIdentityUI() {
+      dom.nicknameInput.value = state.nickname;
+      const board = BOARDS[state.currentBoard];
+      const allowed = board.allowedIdentities || ['freshman', 'repeater'];
+
+      dom.identityToggle.querySelectorAll('.identity-btn').forEach(btn => {
+        const isAllowed = allowed.includes(btn.dataset.identity);
+        btn.style.display = isAllowed ? '' : 'none';
+        btn.classList.toggle('active', btn.dataset.identity === state.identity);
+      });
+      syncAvatarUI();
+      syncPendingImageUI();
+    }
+
+    function bindIdentityAndNickname() {
+      dom.nicknameInput.addEventListener('input', e => {
+        state.nickname = e.target.value;
+        saveBoardData();
+      });
+
+      dom.identityToggle.querySelectorAll('.identity-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          state.identity = btn.dataset.identity;
+          saveBoardData();
+          syncIdentityUI();
+        });
+      });
+
+      dom.avatarUploader.addEventListener('click', () => {
+        dom.avatarFileInput.click();
+      });
+
+      dom.avatarFileInput.addEventListener('change', async e => {
+        const file = e.target.files && e.target.files[0];
+        if (file) {
+          await handleAvatarFile(file);
+        }
+        e.target.value = '';
+      });
+
+      // 帖子图片附件
+      dom.attachImageBtn.addEventListener('click', () => {
+        dom.postImageInput.click();
+      });
+
+      dom.postImageInput.addEventListener('change', async e => {
+        const file = e.target.files && e.target.files[0];
+        if (file) {
+          await handlePostImageFile(file);
+        }
+        e.target.value = '';
+      });
+
+      dom.removeImageBtn.addEventListener('click', () => {
+        state.pendingImage = null;
+        syncPendingImageUI();
+      });
+    }
+
+    /* ============================================================
+       板块切换
+       ============================================================ */
+    function switchBoard(boardId) {
+      if (state.currentBoard === boardId) return;
+
+      const board = BOARDS[boardId];
+      if (!board) return;
+
+      dom.boardTabs.forEach(t => t.classList.toggle('active', t.dataset.board === boardId));
+
+      if (board.locked && !state.unlocked.has(boardId)) {
+        state.currentBoard = boardId;
+        applyTheme(boardId);
+        showPasswordGate();
+        return;
+      }
+
+      state.currentBoard = boardId;
+      applyTheme(boardId);
+      loadBoardData(boardId);
+      hidePasswordGate();
+      showBoardMain();
+      syncIdentityUI();
+      renderPosts();
+    }
+
+    function showPasswordGate() {
+      dom.passwordGate.classList.add('visible');
+      dom.boardMain.classList.remove('visible');
+      dom.gateError.textContent = '';
+      dom.passwordInput.value = '';
+      setTimeout(() => dom.passwordInput.focus(), 100);
+    }
+
+    function hidePasswordGate() {
+      dom.passwordGate.classList.remove('visible');
+    }
+
+    function showBoardMain() {
+      dom.boardMain.classList.add('visible');
+    }
+
+    /* ============================================================
+       密码门
+       ============================================================ */
+    function initPasswordGate() {
+      const tryUnlock = () => {
+        const input = dom.passwordInput.value.trim();
+        const board = BOARDS.burial;
+        if (input === board.password) {
+          state.unlocked.add('burial');
+          persistUnlocked();
+          hidePasswordGate();
+          loadBoardData('burial');
+          showBoardMain();
+          syncIdentityUI();
+          renderPosts();
+          dom.gateError.textContent = '';
+        } else {
+          dom.gateError.textContent = '暗号错误，请再试一次。';
+          dom.passwordInput.value = '';
+          dom.passwordInput.focus();
+        }
+      };
+
+      dom.gateSubmitBtn.addEventListener('click', tryUnlock);
+      dom.passwordInput.addEventListener('keypress', e => {
+        if (e.key === 'Enter') { e.preventDefault(); tryUnlock(); }
+      });
+
+      dom.passwordInput.addEventListener('input', e => {
+        e.target.value = e.target.value.replace(/\D/g, '').slice(0, 10);
+      });
+    }
+
+    /* ============================================================
+       初始化
+       ============================================================ */
+    function init() {
+      dom.boardTabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+          switchBoard(tab.dataset.board);
+        });
+      });
+
+      bindIdentityAndNickname();
+      initPasswordGate();
+      initCropEvents();
+      initImageViewer();
+
+      dom.submitPostBtn.addEventListener('click', addNewPost);
+      dom.postContent.addEventListener('keydown', e => {
+        if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+          e.preventDefault();
+          addNewPost();
+        }
+      });
+
+      applyTheme('class1k');
+      loadBoardData('class1k');
+      showBoardMain();
+      hidePasswordGate();
+      syncIdentityUI();
+      renderPosts();
+    }
+
+    init();
+  })();
+</script>
+</body>
+</html>

@@ -1,0 +1,8 @@
+kutoru-wall/
+├── server.js
+├── package.json
+├── public/
+│   ├── index.html
+│   ├── api.js
+│   └── banner.jpg      ← 放入你的横幅图片
+└── data/               ← 服务器自动创建
